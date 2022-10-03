@@ -9,19 +9,19 @@ trigger:
 variables:
  
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'BDtestRGConnection'
+  azureSubscription: 'BDARMtestConnection'
   
   # Web app name
-  webAppName: 'BDtestWebApp'
+  webAppName: 'BDWebApp3'
   
   # Resource group
-  resourceGroupName: 'BDtest'
+  resourceGroupName: 'BDARMtest'
  
   # Environment name
-  environmentName: 'BDtestWebApp'
+  environmentName: 'BDWebApp3'
  
   # Agent VM image name
-  pool: 'LocalLaptopPool'
+  vmImageName: 'ubuntu-latest'
   
 stages:
 - stage: Archive
@@ -29,7 +29,7 @@ stages:
   jobs:  
   - job: Archive
     displayName: Archive
-    pool: 'LocalLaptopPool'
+    pool: LocalLaptopPool
     steps:   
     - task: AzureAppServiceSettings@1
       inputs:
@@ -63,7 +63,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     environment: $(environmentName)
-    pool: 'LocalLaptopPool'
+    pool: LocalLaptopPool
     strategy:
       runOnce:
         deploy:
